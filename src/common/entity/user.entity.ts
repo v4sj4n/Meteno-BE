@@ -19,4 +19,13 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column({ default: null })
+  bio: string;
+
+  @Column({
+    default:
+      'https://qjwzovkhzxhfpfgytfgv.supabase.co/storage/v1/object/public/meteno/userImage/default.jpg',
+  })
+  imageUrl?: string;
 }

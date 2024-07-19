@@ -30,7 +30,7 @@ export class AuthService {
       if (err.code === '23505') {
         throw new ConflictException('Email | Username already exist');
       }
-      throw new ConflictException(err);
+      throw new ConflictException('There was a conflict');
     }
   }
 
