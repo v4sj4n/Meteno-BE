@@ -13,16 +13,13 @@ export class SupabaseService {
 
   async uploadFile(path: string, file: Express.Multer.File): Promise<any> {
     try {
-      console.log(file);
       const blob = new Blob([file.buffer], { type: file.mimetype });
       const { data, error } = await this.supabase.storage
         .from(this.bucket)
         .upload(path, blob);
       if (error) throw new Error(error.message);
-      console.log(data);
       return data;
     } catch (err) {
-      console.log(err);
       throw err;
     }
   }

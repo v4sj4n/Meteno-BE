@@ -8,7 +8,7 @@ export class User {
   @Column()
   firstName: string;
 
-  @Column()
+  @Column({ nullable: true })
   lastName: string;
 
   @Column({ unique: true })
@@ -20,12 +20,11 @@ export class User {
   @Column()
   password: string;
 
-  @Column({ default: null })
+  @Column({ nullable: true })
   bio: string;
 
   @Column({
-    default:
-      'https://qjwzovkhzxhfpfgytfgv.supabase.co/storage/v1/object/public/meteno/userImage/default.jpg',
+    default: 'meteno/userImage/default.jpg',
   })
   imageUrl?: string;
 }

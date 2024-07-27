@@ -27,11 +27,12 @@ export class UserService {
       ],
     });
 
+    user.imageUrl = `${process.env.SUPABASE_BUCKET_URL}${user.imageUrl}`;
+
     return user;
   }
 
   async updateUser(userId: string, updateUserDto: UpdateUserDto) {
-    console.log(updateUserDto);
     try {
       const user = await this.usersRepository.findOne({
         where: { id: +userId },
@@ -54,7 +55,6 @@ export class UserService {
       `userImage/${Date.now()}_${file.originalname}`,
       file,
     );
-    console.log(uploadedImage);
     const userId = req['user'].sub;
     const user = await this.usersRepository.findOne({
       where: {
@@ -63,7 +63,7 @@ export class UserService {
     });
     Object.assign(user, {
       ...user,
-      imageUrl: `https://qjwzovkhzxhfpfgytfgv.supabase.co/storage/v1/object/public/${uploadedImage.fullPath}`,
+      imageUrl: uploadedImage.fullPath,
     });
     await this.usersRepository.save(user);
 
